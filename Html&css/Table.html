@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table with Pagination and Search</title>
+</head>
+<body>
+    <h1>Dynamic Table with Pagination and Search</h1>
+
+    <!-- Search Bar -->
+    <input
+        type="text"
+        id="searchBar"
+        placeholder="Search..."
+        oninput="filterTable()"
+        style="margin-bottom: 20px; padding: 5px; width: 300px;"
+    />
+
+    <table id="example" border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Client Name</th>
+                <th>Transaction Type</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div id="pagination" style="margin-top: 20px;">
+        <!-- Buttons will be dynamically added here -->
+    </div>
+
+    <script>
+        // Sample data array
+        const transactions = [
+            { id: 1, clientName: "John Doe", type: "Purchase", amount: 5000, status: "Success" },
+            { id: 2, clientName: "Jane Smith", type: "Redemption", amount: 3000, status: "Pending" },
+            { id: 3, clientName: "Alice Johnson", type: "Switch", amount: 7000, status: "Failed" },
+            { id: 4, clientName: "Bob Brown", type: "Purchase", amount: 10000, status: "Success" },
+            { id: 5, clientName: "Chris Green", type: "Redemption", amount: 2000, status: "Pending" },
+            { id: 6, clientName: "Emma White", type: "Switch", amount: 8000, status: "Failed" },
+            { id: 7, clientName: "Liam Black", type: "Purchase", amount: 12000, status: "Success" },
+            { id: 8, clientName: "Olivia Brown", type: "Redemption", amount: 4000, status: "Pending" },
+            { id: 9, clientName: "Sophia Blue", type: "Switch", amount: 6000, status: "Failed" },
+            { id: 10, clientName: "James Gray", type: "Purchase", amount: 15000, status: "Success" }
+        ];
+
+        const rowsPerPage = 3; // Number of rows per page
+        let currentPage = 1; // Current page
+        let filteredTransactions = [...transactions]; // Filtered data for search
+
+        // Function to bind data to the table
+        function bindTableData(page) {
+            const tableBody = document.querySelector("#example tbody");
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            // Calculate start and end indices for the current page
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = Math.min(startIndex + rowsPerPage, filteredTransactions.length);
+
+            // Loop through the data for the current page and create rows
+            for (let i = startIndex; i < endIndex; i++) {
+                const transaction = filteredTransactions[i];
+                const row = document.createElement("tr");
+
+                const idCell = document.createElement("td");
+                idCell.textContent = transaction.id;
+                row.appendChild(idCell);
+
+                const clientNameCell = document.createElement("td");
+                clientNameCell.textContent = transaction.clientName;
+                row.appendChild(clientNameCell);
+
+                const typeCell = document.createElement("td");
+                typeCell.textContent = transaction.type;
+                row.appendChild(typeCell);
+
+                const amountCell = document.createElement("td");
+                amountCell.textContent = transaction.amount;
+                row.appendChild(amountCell);
+
+                const statusCell = document.createElement("td");
+                statusCell.textContent = transaction.status;
+                row.appendChild(statusCell);
+
+                tableBody.appendChild(row);
+            }
+        }
+
+        // Function to create pagination controls
+        function createPagination() {
+            const paginationDiv = document.getElementById("pagination");
+            paginationDiv.innerHTML = ""; // Clear existing buttons
+
+            const totalPages = Math.ceil(filteredTransactions.length / rowsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                button.style.margin = "0 5px";
+                button.style.padding = "5px 10px";
+                button.style.cursor = "pointer";
+
+                if (i === currentPage) {
+                    button.style.backgroundColor = "lightblue";
+                    button.style.fontWeight = "bold";
+                }
+
+                button.addEventListener("click", () => {
+                    currentPage = i;
+                    bindTableData(currentPage);
+                    createPagination();
+                });
+
+                paginationDiv.appendChild(button);
+            }
+        }
+
+        // Function to filter the table based on search input
+        function filterTable() {
+            const searchTerm = document.getElementById("searchBar").value.toLowerCase();
+            filteredTransactions = transactions.filter(transaction => {
+                return (
+                    transaction.id.toString().includes(searchTerm) ||
+                    transaction.clientName.toLowerCase().includes(searchTerm) ||
+                    transaction.type.toLowerCase().includes(searchTerm) ||
+                    transaction.amount.toString().includes(searchTerm) ||
+                    transaction.status.toLowerCase().includes(searchTerm)
+                );
+            });
+
+            // Reset to the first page after filtering
+            currentPage = 1;
+            bindTableData(currentPage);
+            createPagination();
+        }
+
+        // Initial call to bind data and create pagination
+        bindTableData(currentPage);
+        createPagination();
+    </script>
+</body>
+</html>

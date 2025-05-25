@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Appointement</title>
+    </head>
+    <body>
+        <fieldset>
+            <legend>Appointment</legend>
+            <form>
+                <label>Name</label><br/>
+                <input type="text"  minlength="4" maxlength="20" required/><br/>
+                <label>select range</label><br/>
+                <input type="range" /><br/>
+                <label>Select course</label><br/>
+                <input type="text" list="course"/>
+                <datalist id="course">
+                    <option value="PHP" />
+                    <option value="Java" />
+                    <option value="laravel" />
+                        
+                </datalist><br/>
+                <label>Date</label><br/>
+                <input type="date" required/><br/>
+                <label>Time</label><br/>
+                <input type="time"/><br/>
+                <button type="submit">save</button>
+            </form>
+        </fieldset>
+    </body>
+</html>

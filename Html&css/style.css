@@ -1,0 +1,76 @@
+.main {
+    background-color: blue;
+    height: 540px;
+    width: 1000px;
+}
+
+.row1 {
+    width: inherit;
+    height: 70px;
+    background-color: rgb(79, 146, 205);
+    font-size: 30px;
+    color: white;
+}
+.nav{
+    width: inherit;
+    height: 40px;
+}
+.navR1{
+    height: inherit;
+    width: 200px;
+    background-color: rgb(167, 33, 167);
+    float: left;
+    color: white;
+}
+.Section1{
+    height: 200px;
+    width: inherit;
+    
+}
+.sideNav{
+    width: 250px;
+    height: inherit;
+    float: left;
+    
+}
+.sideNavR1{
+    height: 40px;
+    width: inherit;
+    background-color: blueviolet;
+
+}
+.imgSection{
+    width: 750px;
+height: inherit;
+background-color: palevioletred;
+float: left;
+}
+.section2{
+    height: 80px;
+    width: inherit;
+  }
+  .section2row{
+    height: inherit;
+    width: 333px;
+    background-color: teal;
+    float: left;
+  }
+  .section3{
+    width: inherit;
+    height: 100px;
+  }
+  .sec3-img{
+    width: 333px;
+    height: inherit;
+    background-color: aqua;
+    float: left;
+  }
+  .section4{
+    height: 50px;
+    width: inherit;
+    background-color: rgb(233, 183, 117);
+  }
+  .footer{
+    float: left;
+  }
+

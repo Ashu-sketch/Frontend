@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>My First HTML Document</h1>
+    <div id="content"></div>  
+    <div id="div2"></div>  
+<div id="div3">
+    <div id="table">
+        <table border="1" cellpadding="10" cellspacing="0">
+            <tr>
+                <th>Employee</th>
+                <th>Company</th>
+            </tr>
+            <tr>
+                <td>Row 1, Cell 1</td>
+                <td>Row 1, Cell 2</td>
+            </tr>
+            <tr>
+                <td>Row 2, Cell 1</td>
+                <td>Row 2, Cell 2</td>
+            </tr>
+        </table>
+    </div>
+</div>  
+ <div id="div4">
+    <h2>My First Heading</h2>
+  </div>
+     
+</body>
+
+<!-- Adding JavaScript code to manipulate the HTML content and style -->
+<script>
+ document.getElementById("content").innerHTML = "hello";
+
+ let studet={
+    name:"Ashu",
+    rollNo:1,
+    age:20
+ };
+ console.log(studet);
+
+ let employee={
+name:"Sunil Singh",
+age:24,
+postion:"Developer",
+salary:1000000
+ };
+ document.getElementById("div2").innerHTML = employee.name + "<br>" + employee.age + "<br>" + employee.postion + "<br>" + employee.salary;
+
+
+
+ // Adding style
+div2.style.color = "darkblue";
+    div2.style.backgroundColor = "lightblue";
+    div2.style.fontSize = "18px";
+    div2.style.fontWeight = "bold";
+    div2.style.marginTop = "20px";  
+    div2.style.fontfamily = "Arial, sans-serif";
+    div2.style.padding = "10px";
+    div3.style.marginTop = "40px";
+    // table.style.margin = "auto";
+    // table.style.display = "block";
+
+</script>
+<script></script>
+</html>

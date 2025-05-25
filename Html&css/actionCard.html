@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Data Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Dynamic Data Example</h1>
+
+    <!-- Search Bar -->
+    <input
+        type="text"
+        id="searchBar"
+        placeholder="Search..."
+        oninput="filterData()"
+        style="margin-bottom: 20px; padding: 5px; width: 300px;"
+    />
+
+    <!-- Dynamic Data Container -->
+    <div id="dataContainer" style="margin-top: 20px;">
+        <!-- Dynamic data will be displayed here -->
+    </div>
+
+    <!-- Pagination Controls -->
+    <div id="pagination" style="margin-top: 20px;">
+        <!-- Pagination buttons will be dynamically added here -->
+    </div>
+
+    <script>
+        // Sample dynamic data
+        const transactions = [
+            { id: 1, clientName: "John Doe", type: "Purchase", amount: 5000, status: "Success" },
+            { id: 2, clientName: "Jane Smith", type: "Redemption", amount: 3000, status: "Pending" },
+            { id: 3, clientName: "Alice Johnson", type: "Switch", amount: 7000, status: "Failed" },
+            { id: 4, clientName: "Bob Brown", type: "Purchase", amount: 10000, status: "Success" },
+            { id: 5, clientName: "Chris Green", type: "Redemption", amount: 2000, status: "Pending" },
+            { id: 6, clientName: "Emma White", type: "Switch", amount: 8000, status: "Failed" },
+            { id: 7, clientName: "Liam Black", type: "Purchase", amount: 12000, status: "Success" },
+            { id: 8, clientName: "Olivia Brown", type: "Redemption", amount: 4000, status: "Pending" },
+            { id: 9, clientName: "Sophia Blue", type: "Switch", amount: 6000, status: "Failed" },
+            { id: 10, clientName: "James Gray", type: "Purchase", amount: 15000, status: "Success" }
+        ];
+
+        const rowsPerPage = 3; // Number of rows per page
+        let currentPage = 1; // Current page
+        let filteredTransactions = [...transactions]; // Filtered data for search
+
+        // Function to display data dynamically
+        function displayData(page) {
+            const container = document.getElementById("dataContainer");
+            container.innerHTML = ""; // Clear ]existing data
+
+            // Calculate start and end indices for the current page
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = Math.min(startIndex + rowsPerPage, filteredTransactions.length);
+
+            // Loop through the data for the current page and display it
+            for (let i = startIndex; i < endIndex; i++) {
+                const transaction = filteredTransactions[i];
+                const div = document.createElement("div");
+                div.style.border = "1px solid black";
+                div.style.padding = "10px";
+                div.style.marginBottom = "10px";
+
+                div.innerHTML = `
+                    <p><strong>ID:</strong> ${transaction.id}</p>
+                    <p><strong>Client Name:</strong> ${transaction.clientName}</p>
+                    <p><strong>Type:</strong> ${transaction.type}</p>
+                    <p><strong>Amount:</strong> ${transaction.amount}</p>
+                    <p><strong>Status:</strong> ${transaction.status}</p>
+                `;
+
+                container.appendChild(div);
+            }
+        }
+
+        // Function to create pagination controls
+        function createPagination() {
+            const paginationDiv = document.getElementById("pagination");
+            paginationDiv.innerHTML = ""; // Clear existing buttons
+
+            const totalPages = Math.ceil(filteredTransactions.length / rowsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                button.style.margin = "0 5px";
+                button.style.padding = "5px 10px";
+                button.style.cursor = "pointer";
+
+                if (i === currentPage) {
+                    button.style.backgroundColor = "lightblue";
+                    button.style.fontWeight = "bold";
+                }
+
+                button.addEventListener("click", () => {
+                    currentPage = i;
+                    displayData(currentPage);
+                    createPagination();
+                });
+
+                paginationDiv.appendChild(button);
+            }
+        }
+
+        // Function to filter data based on search input
+        function filterData() {
+            const searchTerm = document.getElementById("searchBar").value.toLowerCase();
+            filteredTransactions = transactions.filter(transaction => {
+                return (
+                    transaction.id.toString().includes(searchTerm) ||
+                    transaction.clientName.toLowerCase().includes(searchTerm) ||
+                    transaction.type.toLowerCase().includes(searchTerm) ||
+                    transaction.amount.toString().includes(searchTerm) ||
+                    transaction.status.toLowerCase().includes(searchTerm)
+                );
+            });
+
+            // Reset to the first page after filtering
+            currentPage = 1;
+            displayData(currentPage);
+            createPagination();
+        }
+
+        // Initial call to display data and create pagination
+        displayData(currentPage);
+        createPagination();
+    </script>
+</body>
+</html>

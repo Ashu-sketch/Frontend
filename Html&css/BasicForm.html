@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>Registeration form</title>
+    <style>
+        .registerationformform {
+            margin: 40px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="">
+        <div class="registerationformform">
+            <fieldset style="background-color: rgb(213, 179, 244);">
+                <legend>
+                    <h1>Registeration</h1>
+                </legend>
+                <form method=" post" action="/">
+
+                    <label>Name</label></br>
+                    <input type="text" pattern="[a-zA-Z]{3,40}" placeholder="Enter your full name" name="uName" />
+                    </br>
+                    <label>Gender</label></br>
+                    <input type="checkbox" value="Male" name="gender" />Male
+                    <input type="checkbox" value="Female" name="gender" />female
+                    </br>
+                    <label>Country</label></br>
+                    <select>
+                        <option>---Select state---</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option>Punjab</option>
+                        <option>Bihar</option>
+                        <option>Utrakhand</option>
+                        <option>Kashmir</option>
+                        <option>Kerala</option>
+                    </select></br>
+                    <label>Course</label></br>
+                    <select>
+                        <optgroup label="Forntend">
+                            <option>Angular</option>
+                            <option>JS</option>
+                            <option>Angular</option>
+                        </optgroup>
+                    </select>
+                    <select>
+
+                        <optgroup label="backend">
+                            <option>Java</option>
+                            <option>Node</option>
+                        </optgroup>
+                    </select><br>
+                    <label>Email</label></br>
+                    <input type="email" placeholder="email" />
+                    </br>
+                    <label>Contact</label></br>
+                    <input type="tel" pattern="[0-9]{10}" />
+
+                    </br>
+                    <label>Message</label></br>
+                    <textarea></textarea>
+                    </br>
+                    <label> Upload photo </label> </br>
+                    <input type="file" /></br>
+                    <button type="submit">save</button>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+</body>
+
+</html>
